@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
   }
   try {
     const authors = await Author.find(searchOptions);
+    // req.query contains the query parameters from the URL. 
     res.render("authors/index", { authors: authors, searchOptions: req.query }); // render the authors/index.ejs
   } catch {
     res.redirect("/");
