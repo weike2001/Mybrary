@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Book = require("./book");
 
 const authorSchema = new mongoose.Schema({
   name: {
@@ -6,5 +7,24 @@ const authorSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+authorSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function (next) {
+    try {
+      const books = await Book.find({ author: this._id }).exec();
+      //console.log(books);
+      if (books.length > 0) {
+        next(new Error("This author has books still"));
+      } else {
+        next();
+      }
+    } catch (error) {
+      //console.log(error);
+      next(error);
+    }
+  }
+);
 
 module.exports = mongoose.model("Author", authorSchema);
