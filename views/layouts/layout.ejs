@@ -8,41 +8,23 @@
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
         rel="stylesheet">
+    <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script defer src="/javascripts/fileUpload.js"></script>
+    <link id="main.css" rel="stylesheet" href="/stylesheets/main.css">
     <title>Mybrary</title>
 </head>
 
 <body>
-    <%- include('../partials/header.ejs') %>
-        <%- include('../partials/errorMessage.ejs') %>
-            <%- body %>
-
-                <!-- FilePond Scripts -->
-                <script
-                    src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-                <script
-                    src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-                <script
-                    src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-                <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
-                <!-- FilePond Initialization -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        FilePond.registerPlugin(
-                            FilePondPluginImagePreview,
-                            FilePondPluginImageResize,
-                            FilePondPluginFileEncode
-                        );
-                        FilePond.setOptions({
-                            stylePanelAspectRatio: 80 / 100,
-                            imageResizeTargetWidth: 80,
-                            imageResizeTargetHeight: 150
-                        });
-
-                        // Apply FilePond to all file input elements
-                        FilePond.parse(document.body);
-                    });
-                </script>
+    <div class="container">
+        <%- include('../partials/header.ejs') %>
+            <div class="inner-container">
+                <%- include('../partials/errorMessage.ejs') %>
+                    <%- body %>
+            </div>
+    </div>
 </body>
 
 </html>
